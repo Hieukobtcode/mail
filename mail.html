@@ -1,430 +1,220 @@
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
-    <title>Hỗ Trợ Đồ Án CNTT – Mùa Thu</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background: #fdf6ec;
-            font-family: 'Poppins', Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 30px 15px;
-        }
-
-        /* Falling leaves animation */
-        .leaf-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .leaf {
-            position: absolute;
-            top: -60px;
-            font-size: 22px;
-            animation: fall linear infinite;
-            opacity: 0.75;
-            user-select: none;
-        }
-
-        @keyframes fall {
-            0% {
-                top: -60px;
-                transform: rotate(0deg) translateX(0px);
-                opacity: 0.8;
-            }
-
-            50% {
-                transform: rotate(180deg) translateX(40px);
-            }
-
-            100% {
-                top: 110vh;
-                transform: rotate(360deg) translateX(-20px);
-                opacity: 0;
-            }
-        }
-
-        /* Email wrapper */
-        .email-wrapper {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Card */
-        .email-card {
-            background: #fff8f0;
-            border-radius: 16px;
-            border: 1px solid #e8c99a;
-            box-shadow: 0 8px 40px rgba(180, 100, 20, 0.12);
-            overflow: hidden;
-        }
-
-        /* Header */
-        .email-header {
-            background: linear-gradient(135deg, #b45309 0%, #d97706 40%, #ea580c 80%, #c2410c 100%);
-            padding: 36px 24px 32px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .email-header::before {
-            content: '';
-            position: absolute;
-            top: -30px;
-            left: -30px;
-            width: 140px;
-            height: 140px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 50%;
-        }
-
-        .email-header::after {
-            content: '';
-            position: absolute;
-            bottom: -40px;
-            right: -20px;
-            width: 180px;
-            height: 180px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        }
-
-        .header-leaves {
-            font-size: 28px;
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 12px;
-            animation: sway 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes sway {
-            from {
-                transform: rotate(-3deg);
-            }
-
-            to {
-                transform: rotate(3deg);
-            }
-        }
-
-        .email-header h1 {
-            font-size: 26px;
-            font-weight: 700;
-            color: #fff;
-            margin: 0 0 10px;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .email-header p {
-            font-size: 14px;
-            color: #fde68a;
-            line-height: 1.7;
-            margin: 0 0 20px;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            padding: 11px 26px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #92400e;
-            background: #fde68a;
-            text-decoration: none;
-            transition: background 0.2s, transform 0.2s;
-            border: none;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-primary:hover {
-            background: #fbbf24;
-            transform: translateY(-1px);
-        }
-
-        /* Decorative divider */
-        .divider {
-            text-align: center;
-            font-size: 22px;
-            letter-spacing: 6px;
-            padding: 6px 0 0;
-            color: #d97706;
-            background: linear-gradient(135deg, #b45309, #ea580c);
-            margin: 0;
-        }
-
-        /* Body section */
-        .email-body {
-            padding: 28px 24px 20px;
-        }
-
-        /* Services box */
-        .services-box {
-            background: linear-gradient(135deg, #fff7ed, #fef3c7);
-            border-radius: 12px;
-            border: 1px solid #f59e0b;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-
-        .services-box h2 {
-            font-size: 17px;
-            font-weight: 700;
-            color: #92400e;
-            text-align: center;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .service-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 9px 0;
-            border-bottom: 1px dashed #f59e4488;
-        }
-
-        .service-item:last-child {
-            border-bottom: none;
-        }
-
-        .service-icon {
-            font-size: 16px;
-            min-width: 24px;
-            margin-top: 1px;
-        }
-
-        .service-text {
-            font-size: 13px;
-            color: #78350f;
-            line-height: 1.6;
-        }
-
-        .service-text strong {
-            color: #92400e;
-            font-weight: 600;
-        }
-
-        /* CTA section */
-        .cta-section {
-            background: linear-gradient(135deg, #92400e 0%, #b45309 50%, #c2410c 100%);
-            border-radius: 12px;
-            padding: 28px 20px;
-            text-align: center;
-            margin-bottom: 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '🍁';
-            position: absolute;
-            font-size: 60px;
-            opacity: 0.1;
-            top: -10px;
-            left: -10px;
-        }
-
-        .cta-section::after {
-            content: '🍂';
-            position: absolute;
-            font-size: 60px;
-            opacity: 0.1;
-            bottom: -10px;
-            right: -10px;
-        }
-
-        .cta-section h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-
-        .cta-section p {
-            font-size: 13px;
-            color: #fde68a;
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 11px 24px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-            border: 2px solid #fde68a;
-            color: #fde68a;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .btn-cta:hover {
-            background: #fde68a;
-            color: #92400e;
-        }
-
-        /* Footer */
-        .email-footer {
-            background: #fff7ed;
-            border-top: 1px solid #f59e0b44;
-            padding: 20px 24px;
-            text-align: center;
-        }
-
-        .footer-leaves {
-            font-size: 18px;
-            letter-spacing: 4px;
-            margin-bottom: 8px;
-        }
-
-        .email-footer p {
-            font-size: 11.5px;
-            color: #a16207;
-            line-height: 1.7;
-        }
-
-        .unsubscribe {
-            margin-top: 8px !important;
-            color: #b45309 !important;
-            font-style: italic;
-        }
-
-        /* Season badge */
-        .season-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
-            border-radius: 20px;
-            padding: 5px 14px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #92400e;
-            margin-bottom: 16px;
-        }
-    </style>
-</head>
-
-<body>
-
-
-    <div class="email-wrapper">
-        <div class="email-card">
-
-            <!-- HEADER -->
-            <div class="email-header">
-                <h1>Đồ án kỳ Fall đã tới!!</h1>
-                <p>
-                    Chào <strong style="color:#fff">Lê Thành Đoàn</strong>,<br>
-                    Mùa thu mang đến nguồn cảm hứng bất tận —<br>
-                    mình sẵn sàng đồng hành giúp bạn<br>hoàn thành đồ án &amp; khóa luận hiệu quả nhất!
-                </p>
-                <a href="https://lhieu9254-dot-yamm-track.appspot.com/2f6jBxfA3QYbo_x0CvaEjU37TCb_mZGXNB2IoDmGx4pV3pqpsngHMVzMstU_RyZ96heQgKXL_LzqN6jeNJEaayrKfy26jdGAqIpE94loUsIZ00Dp5vyPzAj0483JhWnadUnhG4t1G3q8R_sfILtQ88le-YNPcIhE9Q116pF4V6srfjGf_tA"
-                    class="btn-primary" target="_blank">Liên hệ tư vấn ngay</a>
-            </div>
-
-            <!-- BODY -->
-            <div class="email-body">
-
-                <!-- Services box -->
-                <div class="services-box">
-                    <h2>Mình có thể hỗ trợ bạn gì?</h2>
-
-                    <div class="service-item">
-                        <div class="service-text">
-                            <strong>Lập trình đa nền tảng:</strong> Web, Mobile, Desktop
-                        </div>
-                    </div>
-
-                    <div class="service-item">
-                        <div class="service-text">
-                            <strong>Ngôn ngữ &amp; Framework:</strong> PHP, Laravel, React, Vue, Angular, NodeJS,
-                            Python, Java...
-                        </div>
-                    </div>
-
-                    <div class="service-item">
-                        <div class="service-text">
-                            <strong>Database &amp; API:</strong> MySQL, MongoDB, PostgreSQL, RESTful API, GraphQL
-                        </div>
-                    </div>
-
-                    <div class="service-item">
-                        <div class="service-text">
-                            <strong>Học thuật:</strong> Báo cáo, slide thuyết trình, hướng dẫn bảo vệ đồ án
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CTA Section -->
-                <div class="cta-section">
-                    <h2>Bạn đang cần hỗ trợ đồ án?</h2>
-                    <p>Mùa thu đẹp nhất khi bạn chạm đến thành công —<br>mình sẵn sàng lắng nghe và hỗ trợ bạn ngay hôm
-                        nay!</p>
-                    <div class="cta-buttons">
-                        <a href="https://zalo.me/0862319515" class="btn-cta" target="_blank">
-                            Zalo
-                        </a>
-
-                        <a href="https://t.me/hieuisme33" class="btn-cta" target="_blank">
-                            Telegram
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- FOOTER -->
-            <div class="email-footer">
-                <p>© 2026 Dịch Vụ Hỗ Trợ Đồ Án CNTT · Uy tín &amp; Bảo mật</p>
-                <p class="unsubscribe">Nếu bạn không muốn nhận thêm email, vui lòng trả lời với nội dung <em>"Hủy nhận
-                        tin"</em>.</p>
-            </div>
-
-        </div>
-    </div>
-
-</body>
-
-</html>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+    style="margin:0;padding:0;background-color:#fdf6ec;font-family:Arial,Helvetica,sans-serif;">
+    <tbody>
+        <tr>
+            <td align="center" style="padding:20px 10px;">
+            <!-- OUTER CONTAINER -->
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="600"
+                style="width:100%;max-width:600px;margin:0 auto;background-color:#fff8f0;border:1px solid #e8c99a;border-radius:16px;overflow:hidden;">
+                <tbody>
+                    <!-- HEADER -->
+                    <tr>
+                        <td align="center"
+                            style="padding:34px 24px 30px;background-color:#b45309;background-image:linear-gradient(135deg,#b45309 0%,#d97706 45%,#ea580c 80%,#c2410c 100%);">
+                            <!-- FALL DECORATION -->
+                            <div style="font-size:25px;line-height:1;margin-bottom:14px;">
+                                🍁 &nbsp; 🍂 &nbsp; 🍁
+                            </div>
+                            <h1
+                                style="margin:0 0 10px;font-family:Arial,Helvetica,sans-serif;font-size:26px;line-height:1.3;font-weight:700;letter-spacing:0.5px;color:#ffffff;">
+                                Đồ án kỳ Fall đã tới!!
+                            </h1>
+                            <p
+                                style="margin:0 0 20px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#fde68a;">
+                                Chào <strong style="color:#ffffff;">Lê Thành Đoàn</strong>,<br>
+                                Mùa thu mang đến nguồn cảm hứng bất tận —<br>
+                                mình sẵn sàng đồng hành giúp bạn<br>
+                                hoàn thành đồ án &amp; khóa luận hiệu quả nhất!
+                            </p>
+                            <!-- PRIMARY BUTTON -->
+                            <table border="0" cellpadding="0" cellspacing="0" align="center">
+                                <tbody>
+                                    <tr>
+                                        <td align="center"
+                                            style="background-color:#fde68a;border-radius:30px;">
+                                            <a href="https://lhieu9254-dot-yamm-track.appspot.com/2f6jBxfA3QYbo_x0CvaEjU37TCb_mZGXNB2IoDmGx4pV3pqpsngHMVzMstU_RyZ96heQgKXL_LzqN6jeNJEaayrKfy26jdGAqIpE94loUsIZ00Dp5vyPzAj0483JhWnadUnhG4t1G3q8R_sfILtQ88le-YNPcIhE9Q116pF4V6srfjGf_tA"
+                                                target="_blank"
+                                                style="display:inline-block;padding:12px 26px;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;line-height:1;color:#92400e;text-decoration:none;border:1px solid #fde68a;border-radius:30px;">
+                                                Liên hệ tư vấn ngay
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- DECORATIVE DIVIDER -->
+                    <tr>
+                        <td align="center"
+                            style="height:14px;padding:0;background-color:#c2410c;color:#fde68a;font-size:13px;line-height:14px;letter-spacing:7px;">
+                            ✦ 🍂 ✦ 🍁 ✦
+                        </td>
+                    </tr>
+                    <!-- BODY -->
+                    <tr>
+                        <td style="padding:28px 20px 20px;background-color:#fff8f0;">
+                            <!-- SERVICES BOX -->
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0"
+                                style="background-color:#fff7ed;border:1px solid #f59e0b;border-radius:12px;">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding:22px 20px;">
+                                            <h2
+                                                style="margin:0 0 16px;text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.4;font-weight:bold;color:#92400e;">
+                                                🍂 Mình có thể hỗ trợ bạn gì?
+                                            </h2>
+                                            <!-- SERVICE 1 -->
+                                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td
+                                                            style="padding:9px 0;border-bottom:1px dashed #f5c27a;">
+                                                            <span
+                                                                style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#d97706;font-weight:bold;">✦</span>
+                                                            <span
+                                                                style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.6;color:#78350f;">
+                                                                <strong style="color:#92400e;">Lập trình đa nền tảng:</strong>
+                                                                Web, Mobile, Desktop
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- SERVICE 2 -->
+                                                    <tr>
+                                                        <td
+                                                            style="padding:9px 0;border-bottom:1px dashed #f5c27a;">
+                                                            <span
+                                                                style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#d97706;font-weight:bold;">✦</span>
+                                                            <span
+                                                                style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.6;color:#78350f;">
+                                                                <strong style="color:#92400e;">Ngôn ngữ &amp; Framework:</strong>
+                                                                PHP, Laravel, React, Vue, Angular, NodeJS, Python, Java...
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- SERVICE 3 -->
+                                                    <tr>
+                                                        <td
+                                                            style="padding:9px 0;border-bottom:1px dashed #f5c27a;">
+                                                            <span
+                                                                style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#d97706;font-weight:bold;">✦</span>
+                                                            <span
+                                                                style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.6;color:#78350f;">
+                                                                <strong style="color:#92400e;">Database &amp; API:</strong>
+                                                                MySQL, MongoDB, PostgreSQL, RESTful API, GraphQL
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- SERVICE 4 -->
+                                                    <tr>
+                                                        <td style="padding:9px 0;">
+                                                            <span
+                                                                style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#d97706;font-weight:bold;">✦</span>
+                                                            <span
+                                                                style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.6;color:#78350f;">
+                                                                <strong style="color:#92400e;">Học thuật:</strong>
+                                                                Báo cáo, slide thuyết trình, hướng dẫn bảo vệ đồ án
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- SPACE -->
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td height="20" style="height:20px;font-size:1px;line-height:1px;">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- CTA -->
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0"
+                                style="background-color:#92400e;background-image:linear-gradient(135deg,#92400e 0%,#b45309 50%,#c2410c 100%);border-radius:12px;">
+                                <tbody>
+                                    <tr>
+                                        <td align="center" style="padding:28px 18px;">
+                                            <div style="font-size:28px;line-height:1;margin-bottom:10px;">
+                                                🍁
+                                            </div>
+                                            <h2
+                                                style="margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:20px;line-height:1.4;font-weight:bold;color:#ffffff;">
+                                                Bạn đang cần hỗ trợ đồ án?
+                                            </h2>
+                                            <p
+                                                style="margin:0 0 20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.7;color:#fde68a;">
+                                                Mùa thu đẹp nhất khi bạn chạm đến thành công —<br>
+                                                mình sẵn sàng lắng nghe và hỗ trợ bạn ngay hôm nay!
+                                            </p>
+                                            <!-- CTA BUTTONS -->
+                                            <table border="0" cellpadding="0" cellspacing="0" align="center">
+                                                <tbody>
+                                                    <tr>
+                                                        <!-- ZALO -->
+                                                        <td align="center"
+                                                            style="padding:0 5px;">
+                                                            <a href="https://zalo.me/0862319515"
+                                                                target="_blank"
+                                                                style="display:inline-block;padding:11px 24px;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;line-height:1;color:#fde68a;text-decoration:none;border:1px solid #fde68a;border-radius:30px;">
+                                                                Zalo
+                                                            </a>
+                                                        </td>
+                                                        <!-- TELEGRAM -->
+                                                        <td align="center"
+                                                            style="padding:0 5px;">
+                                                            <a href="https://t.me/hieuisme33"
+                                                                target="_blank"
+                                                                style="display:inline-block;padding:11px 24px;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;line-height:1;color:#fde68a;text-decoration:none;border:1px solid #fde68a;border-radius:30px;">
+                                                                Telegram
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- FOOTER -->
+                    <tr>
+                        <td align="center"
+                            style="padding:20px 20px;background-color:#fff7ed;border-top:1px solid #f5c27a;">
+                            <div
+                                style="font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1;margin-bottom:9px;letter-spacing:4px;">
+                                🍂 🍁 🍂
+                            </div>
+                            <p
+                                style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;line-height:1.7;color:#a16207;">
+                                © 2026 Dịch Vụ Hỗ Trợ Đồ Án CNTT · Uy tín &amp; Bảo mật
+                            </p>
+                            <p
+                                style="margin:8px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;line-height:1.7;color:#b45309;font-style:italic;">
+                                Nếu bạn không muốn nhận thêm email, vui lòng trả lời email này với nội dung
+                                <strong>"Hủy nhận tin"</strong>.
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- BOTTOM SPACE -->
+            <table width="600" border="0" cellpadding="0" cellspacing="0"
+                style="width:100%;max-width:600px;">
+                <tbody>
+                    <tr>
+                        <td height="15"
+                            style="height:15px;font-size:1px;line-height:1px;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</tbody>
+</table>
